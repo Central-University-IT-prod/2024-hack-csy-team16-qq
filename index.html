@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <style>
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>iХолодильник</title>
+</head>
+<body class = "img"; class="qwe">
+    
+    <div class="container">
+        <form id="loginForm">
+            <h2>Авторизация</h2>
+            <input type="text" id="username" placeholder="Логин" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <button type="submit" class="buton0">Войти</button>
+         </form>
+
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === '{{sensitive data}}' && password === '{{sensitive data}}') {
+                window.location.href = 'dashboard.html'; // Перенаправление на dashboard.html
+            } 
+            else if(username ==='chipi') {
+                window.location.href = 'chipi.html';
+            }
+            else {
+                alert('Неверный логин или пароль!');
+            }
+        });
+    </script>
+</body>
+</html>

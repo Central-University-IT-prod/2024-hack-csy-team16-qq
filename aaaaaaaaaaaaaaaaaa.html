@@ -1,0 +1,31 @@
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('http://127.0.0.1:8000/api/greet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Сетевая ошибка');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const messageElement = document.getElementById('message');
+                messageElement.textContent = data.message || 'Добро пожаловать!';
+                messageElement.style.color = 'green';
+                // Здесь можно добавить дополнительные действия по обработке успешного ответа
+            })
+            .catch((error) => {
+                console.error('Ошибка:', error);
+                const messageElement = document.getElementById('message');
+                messageElement.textContent = 'Ошибка авторизации. Проверьте данные.';
+                messageElement.style.color = 'red';
+            });
+        });

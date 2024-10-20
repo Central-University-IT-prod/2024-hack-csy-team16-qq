@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Холодильник</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="shelves">
+        <div class="shelf" id="shelf-fruits">
+            <h2>
+            <div class="shelf-title">продукты</div>
+            <div class="products"></div>
+            </h2>
+            <input type="text" id="new-fruit" placeholder="" />
+            <button onclick="addProduct('fruits')">Добавить</button>
+        </div>
+        <div class="shelf" id="shelf-age">
+            <h2>
+            <div class="shelf-title">годен до</div>
+            <div class="age1"></div>
+            </h2>
+            <input type="text" id="new-age" placeholder="yyyy/mm/dd" />
+        </div>
+    <script>
+        function addProduct(type) {
+            let input, productList;
+            if (type === 'fruits') {
+                input = document.getElementById('new-fruit');
+                productList = document.querySelector('#shelf-fruits .products');
+            }
+            productName = input.value.trim();
+            let newAge, ageList;
+            if (type === 'fruits') {
+                newAge = document.getElementById('new-age');
+                ageList = document.querySelector('#shelf-ages .products');
+            }
+            newAge1 = newAge.value.trim();
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            console.log(Date.parse(newAge1))
+            console.log(Date.parse(new Date))
+            deltaT=(((Date.parse(newAge1))-(Date.parse(new Date)))/(1000*60*60*24))
+            bay=(Math.floor(deltaT*10))/10
+            if (productName) {
+                a=productName+String(': '+bay+'дней')
+                productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `${a} <button onclick="removeProduct(this)">Удалить</button>`;
+                productList.appendChild(productDiv);
+                input.value = ''; // Очистка поля ввода
+                newAge.value = '';
+            } else {
+                alert('Пожалуйста, введите название продукта.');
+            }
+        }
+
+        function removeProduct(button) {
+            const productDiv = button.parentElement;
+            productDiv.remove();
+        }
+    </script>
+</body>
+</html>
